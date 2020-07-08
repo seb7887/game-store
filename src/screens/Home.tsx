@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { StatusBar, FlatList } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import styled from 'styled-components/native'
 
 import categories from '../utils/categories'
@@ -9,10 +10,11 @@ import Text from '@components/Text'
 const Home: React.FunctionComponent = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const gamesRef = useRef()
+  const navigation = useNavigation()
 
   const GameItem = (game: Game) => {
     return (
-      <SingleGame>
+      <SingleGame onPress={() => navigation.navigate('Game', { game })}>
         <GameCover source={{ uri: game.cover }} />
         <GameInfo style={{ backgroundColor: game.backgroundColor }}>
           <GameImage source={{ uri: game.cover }} />
